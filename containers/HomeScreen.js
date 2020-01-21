@@ -2,14 +2,16 @@ import React, { useState, useEffect } from "react";
 import {
       ActivityIndicator,
       FlatList,
-      Image,
       ScrollView,
       StyleSheet,
       Text,
+      TouchableOpacity,
       View
 } from "react-native";
 import Axios from "axios";
-// import TestImage from "../assets/testImage.jpg";
+
+// Components import
+import Roomcard from "../components /Roomcard";
 
 export default function HomeScreen() {
       const [isLoading, setIsloading] = useState();
@@ -54,16 +56,11 @@ export default function HomeScreen() {
                               data={rooms}
                               renderItem={({ item }) => {
                                     return (
-                                          <>
-                                                <Image
-                                                      source={item.photos}
-                                                      style={{
-                                                            width: 300,
-                                                            height: 150
-                                                      }}
-                                                />
-                                                <Text>{item.title}</Text>
-                                          </>
+                                          <TouchableOpacity
+                                                style={{ padding: 20 }}
+                                          >
+                                                <Roomcard item={item} />
+                                          </TouchableOpacity>
                                     );
                               }}
                         ></FlatList>
