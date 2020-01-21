@@ -1,19 +1,24 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { AsyncStorage } from "react-native";
+import { NavigationNativeContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+// Pages import
+import HomeScreen from "./containers/HomeScreen";
+import SigninScreen from "./containers/SigninScreen";
+
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
       return (
-            <View style={styles.container}>
-                  <Text>Hello World!</Text>
-            </View>
+            <NavigationNativeContainer>
+                  <Stack.Navigator>
+                        <Stack.Screen name="Signin">
+                              {() => <SigninScreen />}
+                        </Stack.Screen>
+                  </Stack.Navigator>
+            </NavigationNativeContainer>
       );
 }
-
-const styles = StyleSheet.create({
-      container: {
-            flex: 1,
-            backgroundColor: "#fff",
-            alignItems: "center",
-            justifyContent: "center"
-      }
-});
