@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-      Dimensions,
       KeyboardAvoidingView,
       ScrollView,
       StyleSheet,
@@ -10,16 +9,17 @@ import {
       View
 } from "react-native";
 import Constants from "expo-constants";
-
-const width = Dimensions.get("window").width;
-const height = Dimensions.get("window").height;
-console.log(width);
-console.log(height);
+import Axios from "axios";
 
 // Icon import
 import { Entypo } from "@expo/vector-icons";
 
-export default function SigninScreen() {
+export default function SigninScreen({ setToken }) {
+      const [email, setEmail] = useState("arno@airbnb-api.com");
+      const [password, setPassword] = useState("password01");
+      // console.log(email);
+      // console.log(password);
+
       return (
             <ScrollView
                   style={{
@@ -44,13 +44,42 @@ export default function SigninScreen() {
                               <View
                                     style={{
                                           justifyContent: "center",
-                                          alignItems: "center"
+                                          alignItems: "center",
+                                          padding: 60
                                     }}
                               >
-                                    <Text>Name:</Text>
-                                    <TextInput placeholder="UserName"></TextInput>
-                                    <Text>Password:</Text>
-                                    <TextInput placeholder="Password"></TextInput>
+                                    <Text
+                                          style={{
+                                                color: "white",
+                                                fontSize: 20
+                                          }}
+                                    >
+                                          Name:
+                                    </Text>
+                                    <TextInput
+                                          style={styles.textInput}
+                                          placeholder="UserName"
+                                          value={email}
+                                          onChangeText={text => {
+                                                setEmail(text);
+                                          }}
+                                    ></TextInput>
+                                    <Text
+                                          style={{
+                                                color: "white",
+                                                fontSize: 20
+                                          }}
+                                    >
+                                          Password:
+                                    </Text>
+                                    <TextInput
+                                          style={styles.textInput}
+                                          placeholder="Password"
+                                          value={password}
+                                          onChangeText={text => {
+                                                setPassword(text);
+                                          }}
+                                    ></TextInput>
                               </View>
                         </KeyboardAvoidingView>
                         <TouchableOpacity
@@ -61,14 +90,42 @@ export default function SigninScreen() {
                                     justifyContent: "center",
                                     marginHorizontal: 10,
                                     marginVertical: 0,
-                                    height: 44,
-                                    width: 100,
+                                    height: 64,
+                                    width: 160,
                                     borderRadius: "50%"
                               }}
                               title="log-in"
                               mode="contained"
+                              onPress={async () => {
+                                    console.log("onPress OK");
+
+                                    try {
+                                          const response = await Axios.post(
+                                                "https://airbnb-api.herokuapp.com/api/user/log_in",
+                                                {
+                                                      email: email,
+                                                      password: password
+                                                }
+                                          );
+                                          if (response.data.token) {
+                                                // console.log(
+                                                //       response.data.token
+                                                // );
+                                                setToken(response.data.token);
+                                          }
+                                    } catch (error) {
+                                          alert(error.message);
+                                    }
+                              }}
                         >
-                              <Text>Log in</Text>
+                              <Text
+                                    style={{
+                                          color: "#FA5A60",
+                                          fontSize: 26
+                                    }}
+                              >
+                                    Login
+                              </Text>
                         </TouchableOpacity>
                   </View>
             </ScrollView>
@@ -82,9 +139,19 @@ const styles = StyleSheet.create({
             alignItems: "center",
             justifyContent: "center"
       },
+      textInput: {
+            borderBottomWidth: 1,
+            borderBottomColor: "white",
+            padding: 15,
+            margin: 5,
+
+            width: 300
+      },
       title: {
-            fontWeight: "200",
             color: "white",
-            fontSize: 35
+            padding: 10,
+
+            fontSize: 45,
+            fontWeight: "300"
       }
 });
