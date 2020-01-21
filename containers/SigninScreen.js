@@ -17,6 +17,7 @@ import { Entypo } from "@expo/vector-icons";
 export default function SigninScreen({ setToken }) {
       const [email, setEmail] = useState("arno@airbnb-api.com");
       const [password, setPassword] = useState("password01");
+      const [error, setError] = useState(false);
       // console.log(email);
       // console.log(password);
 
@@ -40,12 +41,20 @@ export default function SigninScreen({ setToken }) {
                   >
                         <Entypo name="home" size={90} color="white" />
                         <Text style={styles.title}>Welcome</Text>
-                        <KeyboardAvoidingView>
+                        <KeyboardAvoidingView
+                              behavior="padding"
+                              style={{
+                                    flex: 1,
+                                    paddingTop: 60,
+                                    alignItems: "center"
+                              }}
+                        >
                               <View
                                     style={{
+                                          width: "100%",
                                           justifyContent: "center",
-                                          alignItems: "center",
-                                          padding: 60
+                                          alignItems: "flexSart",
+                                          paddingHorizontal: 20
                                     }}
                               >
                                     <Text
@@ -57,6 +66,7 @@ export default function SigninScreen({ setToken }) {
                                           Name:
                                     </Text>
                                     <TextInput
+                                          autoCapitalize="none"
                                           style={styles.textInput}
                                           placeholder="UserName"
                                           value={email}
@@ -73,7 +83,17 @@ export default function SigninScreen({ setToken }) {
                                           Password:
                                     </Text>
                                     <TextInput
-                                          style={styles.textInput}
+                                          secureTextEntry={true}
+                                          style={[
+                                                styles.textInput,
+                                                {
+                                                      marginTop: 20
+                                                      // backgroundColor:
+                                                      //       error === true
+                                                      //             ? "red"
+                                                      //             : "grey"
+                                                }
+                                          ]}
                                           placeholder="Password"
                                           value={password}
                                           onChangeText={text => {
@@ -89,7 +109,7 @@ export default function SigninScreen({ setToken }) {
                                     alignItems: "center",
                                     justifyContent: "center",
                                     marginHorizontal: 10,
-                                    marginVertical: 0,
+                                    marginVertical: 40,
                                     height: 64,
                                     width: 160,
                                     borderRadius: "50%"
@@ -142,15 +162,15 @@ const styles = StyleSheet.create({
       textInput: {
             borderBottomWidth: 1,
             borderBottomColor: "white",
+            color: "white",
+            fontSize: 20,
             padding: 15,
             margin: 5,
-
             width: 300
       },
       title: {
             color: "white",
-            padding: 10,
-
+            marginVertical: 30,
             fontSize: 45,
             fontWeight: "300"
       }

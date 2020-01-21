@@ -18,6 +18,7 @@ const Tab = createBottomTabNavigator();
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
+console.log(height);
 
 export default function App() {
       const [userToken, setUsertoken] = useState();
@@ -103,9 +104,7 @@ export default function App() {
                                                       inactiveTintColor: "gray"
                                                 }}
                                           >
-                                                <Tab.Screen
-                                                      name="home" // ?????? checker sur le starter sur GitHub
-                                                >
+                                                <Tab.Screen name="home">
                                                       {() => (
                                                             <Stack.Navigator>
                                                                   <Stack.Screen
