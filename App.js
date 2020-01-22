@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 // Pages import
 import HomeScreen from "./containers/HomeScreen";
+import RoomScreen from "./containers/RoomScreen";
 import SigninScreen from "./containers/SigninScreen";
 import ProfileScreen from "./containers/ProfileScreen";
 import SettingsScreen from "./containers/SettingsScreen";
@@ -116,6 +117,13 @@ export default function App() {
                                                                   >
                                                                         {() => (
                                                                               <HomeScreen />
+                                                                        )}
+                                                                  </Stack.Screen>
+                                                                  <Stack.Screen
+                                                                        name="Room" // ou "Room/:id" ??
+                                                                  >
+                                                                        {() => (
+                                                                              <RoomScreen />
                                                                         )}
                                                                   </Stack.Screen>
                                                                   <Stack.Screen

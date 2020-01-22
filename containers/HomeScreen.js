@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
       ActivityIndicator,
       FlatList,
-      ScrollView,
       StyleSheet,
-      Text,
       TouchableOpacity,
       View
 } from "react-native";
@@ -14,6 +13,7 @@ import Axios from "axios";
 import Roomcard from "../components /Roomcard";
 
 export default function HomeScreen() {
+      const navigation = useNavigation();
       const [isLoading, setIsloading] = useState();
       const [rooms, setRooms] = useState();
 
@@ -24,7 +24,7 @@ export default function HomeScreen() {
                               "https://airbnb-api.herokuapp.com/api/room?city=paris"
                         );
                         if (response.data.rooms) {
-                              console.log(response.data.rooms);
+                              // console.log(response.data.rooms);
                               setRooms(response.data.rooms);
                               setIsloading(false);
                         } else {
@@ -58,10 +58,28 @@ export default function HomeScreen() {
                                     return (
                                           <TouchableOpacity
                                                 style={{ padding: 20 }}
+                                                onPress={() => {
+                                                      navigation.navigate(
+                                                            "Room",
+                                                            {
+                                                                  id: item._id
+                                                            }
+                                                      );
+                                                }}
                                           >
                                                 <Roomcard item={item} />
+                                                <View
+                                                      style={{
+                                                            borderBottomColor:
+                                                                  "#CECECE",
+                                                            borderBottomWidth: 1
+                                                      }}
+                                                ></View>
                                           </TouchableOpacity>
                                     );
+                              }}
+                              keyExtractor={room => {
+                                    return room._id;
                               }}
                         ></FlatList>
                   )}
@@ -69,11 +87,11 @@ export default function HomeScreen() {
       );
 }
 
-const styles = StyleSheet.create({
-      container: {
-            flex: 1,
-            backgroundColor: "#fff",
-            alignItems: "center",
-            justifyContent: "center"
-      }
-});
+// const styles = StyleSheet.create({
+//       container: {
+//             flex: 1,
+//             backgroundColor: "#fff",
+//             alignItems: "center",
+//             justifyContent: "center"
+//       }
+// });

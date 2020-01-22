@@ -1,19 +1,9 @@
 import React from "react";
-import {
-      ActivityIndicator,
-      Button,
-      Image,
-      ImageBackground,
-      Text,
-      View,
-      FlatList,
-      ScrollView
-} from "react-native";
+import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
 // Icon import
 import { Ionicons } from "@expo/vector-icons";
 
 export default function Roomcard({ item }) {
-      // const { item } = props;
       const size = 50;
       const stars = [];
 
@@ -40,7 +30,11 @@ export default function Roomcard({ item }) {
       }
 
       return (
-            <>
+            <View
+                  style={{
+                        paddingBottom: 10
+                  }}
+            >
                   <ImageBackground
                         style={{
                               width: "100%",
@@ -76,7 +70,7 @@ export default function Roomcard({ item }) {
                         }}
                   >
                         <View style={{ flex: 1 }}>
-                              <Text>{item.title}</Text>
+                              <Text style={styles.title}>{item.title}</Text>
                               <View
                                     style={{
                                           flexDirection: "row",
@@ -89,23 +83,28 @@ export default function Roomcard({ item }) {
                                                 marginLeft: 10
                                           }}
                                     >
-                                          {/* {`{item.reviews} `} */}
                                           {item.reviews}
                                           review(s)
                                     </Text>
                               </View>
-                              <Image
-                                    style={{
-                                          height: size,
-                                          width: size,
-                                          borderRadius: size / 2 // Ce borderRadius fait planter Android
-                                    }}
-                                    source={{
-                                          uri: item.user.account.photos[0]
-                                    }}
-                              />
                         </View>
+                        <Image
+                              style={{
+                                    height: size,
+                                    width: size,
+                                    borderRadius: size / 2 // Ce borderRadius fait planter Android
+                              }}
+                              source={{
+                                    uri: item.user.account.photos[0]
+                              }}
+                        />
                   </View>
-            </>
+            </View>
       );
 }
+
+const styles = StyleSheet.create({
+      title: {
+            fontSize: 20
+      }
+});
