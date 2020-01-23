@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
+
 // Icon import
 import { Ionicons } from "@expo/vector-icons";
 
@@ -64,6 +65,7 @@ export default function Roomcard({ item }) {
                               </Text>
                         </View>
                   </ImageBackground>
+
                   <View
                         style={{
                               flexDirection: "row"

@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 // Pages import
 import HomeScreen from "./containers/HomeScreen";
 import RoomScreen from "./containers/RoomScreen";
+import MapScreen from "./containers/MapScreen";
 import SigninScreen from "./containers/SigninScreen";
 import ProfileScreen from "./containers/ProfileScreen";
 import SettingsScreen from "./containers/SettingsScreen";

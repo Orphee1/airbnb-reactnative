@@ -9,6 +9,8 @@ import {
       Text,
       View
 } from "react-native";
+import MapView from "react-native-maps";
+// import { Marker } from 'react-native-maps';
 import Axios from "axios";
 
 // Components import
@@ -27,6 +29,8 @@ export default function RoomScreen() {
       const id = params.id;
       console.log(id);
       console.log(room);
+      // console.log(room.loc[1]);
+      // console.log(room.loc[0]);
 
       useEffect(() => {
             const fetchData = async () => {
@@ -82,6 +86,26 @@ export default function RoomScreen() {
                               >
                                     {room.description}
                               </Text>
+                              <MapView
+                                    showsUserLocation={false}
+                                    // provider="google"
+                                    style={{ height: 300, marginTop: 50 }}
+                                    initialRegion={{
+                                          latitude: room.loc[1],
+                                          longitude: room.loc[0],
+                                          latitudeDelta: 0.03,
+                                          longitudeDelta: 0.03
+                                    }}
+                              >
+                                    <MapView.Marker
+                                          coordinate={{
+                                                latitude: room.loc[1],
+                                                longitude: room.loc[0]
+                                          }}
+                                          title={room.title}
+                                          pinColor="red"
+                                    />
+                              </MapView>
                         </View>
                   )}
             </ScrollView>
