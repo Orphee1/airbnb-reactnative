@@ -3,10 +3,13 @@ import { useNavigation } from "@react-navigation/native";
 import {
       ActivityIndicator,
       FlatList,
+      SafeAreaView,
       StyleSheet,
+      Text,
       TouchableOpacity,
       View
 } from "react-native";
+import MapView from "react-native-maps";
 import Axios from "axios";
 
 // Components import
@@ -15,8 +18,13 @@ import Roomcard from "../components /Roomcard";
 
 export default function HomeScreen() {
       const navigation = useNavigation();
-      const [isLoading, setIsloading] = useState();
+      const [isLoading, setIsloading] = useState(true);
       const [rooms, setRooms] = useState();
+      const [mapSelected, setMapSelected] = useState(false);
+
+      console.log("repère");
+
+      console.log(rooms);
 
       useEffect(() => {
             const fetchData = async () => {
@@ -42,6 +50,37 @@ export default function HomeScreen() {
 
       return (
             <>
+                  <SafeAreaView>
+                        <View
+                              style={{
+                                    flexDirection: "row",
+                                    justifyContent: "space-around",
+                                    alignItems: "center"
+                              }}
+                        >
+                              <TouchableOpacity
+                                    title="Voir la liste"
+                                    onPress={() => {
+                                          setMapSelected(!mapSelected);
+                                    }}
+                                    style={{
+                                          backgroundColor: "#FA5A60",
+                                          borderRadius: "50%",
+                                          padding: 5,
+                                          width: 100,
+                                          marginVertical: 10,
+                                          alignItems: "center",
+                                          justifyContent: "center"
+                                    }}
+                              >
+                                    <Text style={{ color: "white" }}>
+                                          {mapSelected === true
+                                                ? "Voir la liste"
+                                                : "Voir la carte"}
+                                    </Text>
+                              </TouchableOpacity>
+                        </View>
+                  </SafeAreaView>
                   {isLoading ? (
                         <View
                               style={{
@@ -52,6 +91,25 @@ export default function HomeScreen() {
                         >
                               <ActivityIndicator size="large" color="red" />
                         </View>
+                  ) : mapSelected === true ? (
+                        <MapView
+                              showsUserLocation={true}
+                              style={{ height: 300, marginTop: 50 }}
+                        >
+                              {rooms.map((elem, index) => {
+                                    return (
+                                          <MapView.Marker
+                                                coordinate={{
+                                                      latitude: elem.loc[1],
+                                                      longitude: elem.loc[0]
+                                                }}
+                                                title={elem.title}
+                                                description={elem.description}
+                                                key={index}
+                                          />
+                                    );
+                              })}
+                        </MapView>
                   ) : (
                         <FlatList
                               data={rooms}
@@ -88,11 +146,14 @@ export default function HomeScreen() {
       );
 }
 
-// const styles = StyleSheet.create({
-//       container: {
-//             flex: 1,
-//             backgroundColor: "#fff",
-//             alignItems: "center",
-//             justifyContent: "center"
-//       }
-// });
+const styles = StyleSheet.create({
+      container: {
+            flex: 1,
+            backgroundColor: "#fff",
+            alignItems: "center",
+            justifyContent: "center"
+      },
+      button: {
+            backgroundColor: "#FA5A60"
+      }
+});

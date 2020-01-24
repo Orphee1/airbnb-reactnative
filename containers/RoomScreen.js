@@ -2,15 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useRoute } from "@react-navigation/native";
 import {
       ActivityIndicator,
-      Image,
-      ImageBackground,
       ScrollView,
       StyleSheet,
       Text,
       View
 } from "react-native";
 import MapView from "react-native-maps";
-// import { Marker } from 'react-native-maps';
 import Axios from "axios";
 
 // Components import

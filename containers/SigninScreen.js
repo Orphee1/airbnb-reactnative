@@ -117,8 +117,6 @@ export default function SigninScreen({ setToken }) {
                               title="log-in"
                               mode="contained"
                               onPress={async () => {
-                                    console.log("onPress OK");
-
                                     try {
                                           const response = await Axios.post(
                                                 "https://airbnb-api.herokuapp.com/api/user/log_in",
