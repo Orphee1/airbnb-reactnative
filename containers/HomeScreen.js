@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
       ActivityIndicator,
+      Dimensions,
       FlatList,
       SafeAreaView,
       StyleSheet,
@@ -16,15 +17,16 @@ import Axios from "axios";
 
 import Roomcard from "../components /Roomcard";
 
+const height = Dimensions.get("window").height;
+console.log(height);
+
 export default function HomeScreen() {
       const navigation = useNavigation();
       const [isLoading, setIsloading] = useState(true);
       const [rooms, setRooms] = useState();
       const [mapSelected, setMapSelected] = useState(false);
 
-      console.log("repère");
-
-      console.log(rooms);
+      // console.log(rooms);
 
       useEffect(() => {
             const fetchData = async () => {
@@ -94,7 +96,13 @@ export default function HomeScreen() {
                   ) : mapSelected === true ? (
                         <MapView
                               showsUserLocation={true}
-                              style={{ height: 300, marginTop: 50 }}
+                              style={{ height: 800, marginTop: 50 }}
+                              initialRegion={{
+                                    latitude: rooms[0].loc[1],
+                                    longitude: rooms[0].loc[0],
+                                    latitudeDelta: 0.4,
+                                    longitudeDelta: 0.3
+                              }}
                         >
                               {rooms.map((elem, index) => {
                                     return (
@@ -106,7 +114,31 @@ export default function HomeScreen() {
                                                 title={elem.title}
                                                 description={elem.description}
                                                 key={index}
-                                          />
+                                                onPress={() => {
+                                                      navigation.navigate(
+                                                            "Room",
+                                                            {
+                                                                  id: elem._id
+                                                            }
+                                                      );
+                                                }}
+                                          >
+                                                <View
+                                                      style={{
+                                                            width: 40,
+                                                            height: 20,
+                                                            backgroundColor:
+                                                                  "white",
+                                                            justifyContent:
+                                                                  "center",
+                                                            alignItems: "center"
+                                                      }}
+                                                >
+                                                      <Text>
+                                                            {elem.price} €
+                                                      </Text>
+                                                </View>
+                                          </MapView.Marker>
                                     );
                               })}
                         </MapView>
