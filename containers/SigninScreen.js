@@ -8,6 +8,7 @@ import {
       TouchableOpacity,
       View
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import Constants from "expo-constants";
 import Axios from "axios";
 
@@ -15,8 +16,9 @@ import Axios from "axios";
 import { Entypo } from "@expo/vector-icons";
 
 export default function SigninScreen({ setToken }) {
-      const [email, setEmail] = useState("arno@airbnb-api.com");
-      const [password, setPassword] = useState("password01");
+      const navigation = useNavigation();
+      const [email, setEmail] = useState("");
+      const [password, setPassword] = useState("");
       const [error, setError] = useState(false);
       // console.log(email);
       // console.log(password);
@@ -68,7 +70,7 @@ export default function SigninScreen({ setToken }) {
                                     <TextInput
                                           autoCapitalize="none"
                                           style={styles.textInput}
-                                          placeholder="UserName"
+                                          placeholder="email"
                                           value={email}
                                           onChangeText={text => {
                                                 setEmail(text);
@@ -139,10 +141,19 @@ export default function SigninScreen({ setToken }) {
                               <Text
                                     style={{
                                           color: "#FA5A60",
-                                          fontSize: 26
+                                          fontSize: 22
                                     }}
                               >
-                                    Login
+                                    Connexion
+                              </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                              onPress={() => {
+                                    navigation.navigate("Signup");
+                              }}
+                        >
+                              <Text style={{ color: "white" }}>
+                                    Vous n'avez pas de compte ? Inscrivez-vous
                               </Text>
                         </TouchableOpacity>
                   </View>

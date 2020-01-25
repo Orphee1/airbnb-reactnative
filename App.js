@@ -9,6 +9,7 @@ import HomeScreen from "./containers/HomeScreen";
 import RoomScreen from "./containers/RoomScreen";
 import MapScreen from "./containers/MapScreen";
 import SigninScreen from "./containers/SigninScreen";
+import SignupScreen from "./containers/SignupScreen";
 import ProfileScreen from "./containers/ProfileScreen";
 import SettingsScreen from "./containers/SettingsScreen";
 
@@ -54,13 +55,29 @@ export default function App() {
                                     name="Splash"
                                     component={() => null}
                               />
-                        ) : userToken === null ? (
-                              <Stack.Screen
-                                    name="Signin"
-                                    options={{ header: () => null }}
-                              >
-                                    {() => <SigninScreen setToken={setToken} />}
-                              </Stack.Screen>
+                        ) : userToken !== null ? (
+                              <>
+                                    <Stack.Screen
+                                          name="Signin"
+                                          options={{ header: () => null }}
+                                    >
+                                          {() => (
+                                                <SigninScreen
+                                                      setToken={setToken}
+                                                />
+                                          )}
+                                    </Stack.Screen>
+                                    <Stack.Screen
+                                          name="Signup"
+                                          options={{ header: () => null }}
+                                    >
+                                          {() => (
+                                                <SignupScreen
+                                                      setToken={setToken}
+                                                />
+                                          )}
+                                    </Stack.Screen>
+                              </>
                         ) : (
                               <Tab.Screen
                                     name="Tab"
