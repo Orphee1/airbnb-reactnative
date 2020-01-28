@@ -26,6 +26,7 @@ console.log(height);
 export default function App() {
       const [userToken, setUsertoken] = useState();
       const [isLoading, setIsloading] = useState(false);
+      console.log("userToken is " + userToken);
 
       const setToken = async token => {
             if (token) {
@@ -34,7 +35,7 @@ export default function App() {
                   AsyncStorage.removeItem("userToken");
             }
             setUsertoken(token);
-            console.log("userToken is " + userToken);
+            // console.log("userToken is " + userToken);
       };
 
       useEffect(() => {
@@ -55,7 +56,7 @@ export default function App() {
                                     name="Splash"
                                     component={() => null}
                               />
-                        ) : userToken !== null ? (
+                        ) : userToken === null || userToken === undefined ? (
                               <>
                                     <Stack.Screen
                                           name="Signin"
@@ -137,22 +138,9 @@ export default function App() {
                                                                               <HomeScreen />
                                                                         )}
                                                                   </Stack.Screen>
-                                                                  <Stack.Screen
-                                                                        name="Room" // ou "Room/:id" ??
-                                                                  >
+                                                                  <Stack.Screen name="Room">
                                                                         {() => (
                                                                               <RoomScreen />
-                                                                        )}
-                                                                  </Stack.Screen>
-                                                                  <Stack.Screen
-                                                                        name="Profile"
-                                                                        options={{
-                                                                              title:
-                                                                                    "User Profile"
-                                                                        }}
-                                                                  >
-                                                                        {() => (
-                                                                              <ProfileScreen />
                                                                         )}
                                                                   </Stack.Screen>
                                                             </Stack.Navigator>
@@ -169,6 +157,27 @@ export default function App() {
                                                                   >
                                                                         {() => (
                                                                               <SettingsScreen
+                                                                                    setToken={
+                                                                                          setToken
+                                                                                    }
+                                                                              />
+                                                                        )}
+                                                                  </Stack.Screen>
+                                                            </Stack.Navigator>
+                                                      )}
+                                                </Tab.Screen>
+                                                <Tab.Screen name="Profile">
+                                                      {() => (
+                                                            <Stack.Navigator>
+                                                                  <Stack.Screen
+                                                                        name="Profile"
+                                                                        options={{
+                                                                              title:
+                                                                                    "User Profile"
+                                                                        }}
+                                                                  >
+                                                                        {() => (
+                                                                              <ProfileScreen
                                                                                     setToken={
                                                                                           setToken
                                                                                     }

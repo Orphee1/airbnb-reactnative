@@ -17,12 +17,12 @@ export default function SignupScreen({ setToken }) {
       const navigation = useNavigation();
       const [email, setEmail] = useState();
       const [password, setPassword] = useState();
-      const [userName, setUserName] = useState();
+      const [username, setUsername] = useState();
       const [name, setName] = useState();
       const [description, setDescription] = useState();
       console.log(email);
       console.log(password);
-      console.log(userName);
+      console.log(username);
       console.log(name);
       console.log(description);
 
@@ -101,7 +101,7 @@ export default function SignupScreen({ setToken }) {
                                                 setEmail(text);
                                           }}
                                     ></TextInput>
-                                    {/* <Text
+                                    <Text
                                           style={{
                                                 color: "white",
                                                 fontSize: 20
@@ -113,9 +113,9 @@ export default function SignupScreen({ setToken }) {
                                           autoCapitalize="none"
                                           style={styles.textInput}
                                           placeholder="username"
-                                          value={userName}
+                                          value={username}
                                           onChangeText={text => {
-                                                setUserName(text);
+                                                setUsername(text);
                                           }}
                                     ></TextInput>
                                     <Text
@@ -151,7 +151,7 @@ export default function SignupScreen({ setToken }) {
                                           onChangeText={text => {
                                                 setDescription(text);
                                           }}
-                                    ></TextInput> */}
+                                    ></TextInput>
 
                                     <Text
                                           style={{
@@ -196,7 +196,7 @@ export default function SignupScreen({ setToken }) {
                                                       email: email,
                                                       password: password,
                                                       name: name,
-                                                      userName: userName,
+                                                      username: username,
                                                       description: description
                                                 }
                                           );
