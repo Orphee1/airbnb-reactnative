@@ -24,7 +24,6 @@ export default function HomeScreen() {
       const navigation = useNavigation();
       const [isLoading, setIsloading] = useState(true);
       const [rooms, setRooms] = useState();
-      const [mapSelected, setMapSelected] = useState(false);
 
       // console.log(rooms);
 
@@ -35,7 +34,6 @@ export default function HomeScreen() {
                               "https://airbnb-api.herokuapp.com/api/room?city=paris"
                         );
                         if (response.data.rooms) {
-                              // console.log(response.data.rooms);
                               setRooms(response.data.rooms);
                               setIsloading(false);
                         } else {
@@ -61,9 +59,10 @@ export default function HomeScreen() {
                               }}
                         >
                               <TouchableOpacity
-                                    title="Voir la liste"
+                                    title="Voir la carte"
                                     onPress={() => {
-                                          setMapSelected(!mapSelected);
+                                          // setMapSelected(!mapSelected);
+                                          navigation.navigate("Map", { rooms });
                                     }}
                                     style={{
                                           backgroundColor: "#FA5A60",
@@ -76,9 +75,7 @@ export default function HomeScreen() {
                                     }}
                               >
                                     <Text style={{ color: "white" }}>
-                                          {mapSelected === true
-                                                ? "Voir la liste"
-                                                : "Voir la carte"}
+                                          Voir la carte
                                     </Text>
                               </TouchableOpacity>
                         </View>
@@ -93,55 +90,6 @@ export default function HomeScreen() {
                         >
                               <ActivityIndicator size="large" color="red" />
                         </View>
-                  ) : mapSelected === true ? (
-                        <MapView
-                              showsUserLocation={true}
-                              style={{ height: 800, marginTop: 50 }}
-                              initialRegion={{
-                                    latitude: rooms[0].loc[1],
-                                    longitude: rooms[0].loc[0],
-                                    latitudeDelta: 0.4,
-                                    longitudeDelta: 0.3
-                              }}
-                        >
-                              {rooms.map((elem, index) => {
-                                    return (
-                                          <MapView.Marker
-                                                coordinate={{
-                                                      latitude: elem.loc[1],
-                                                      longitude: elem.loc[0]
-                                                }}
-                                                title={elem.title}
-                                                description={elem.description}
-                                                key={index}
-                                                onPress={() => {
-                                                      navigation.navigate(
-                                                            "Room",
-                                                            {
-                                                                  id: elem._id
-                                                            }
-                                                      );
-                                                }}
-                                          >
-                                                <View
-                                                      style={{
-                                                            width: 40,
-                                                            height: 20,
-                                                            backgroundColor:
-                                                                  "white",
-                                                            justifyContent:
-                                                                  "center",
-                                                            alignItems: "center"
-                                                      }}
-                                                >
-                                                      <Text>
-                                                            {elem.price} €
-                                                      </Text>
-                                                </View>
-                                          </MapView.Marker>
-                                    );
-                              })}
-                        </MapView>
                   ) : (
                         <FlatList
                               data={rooms}

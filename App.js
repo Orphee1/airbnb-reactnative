@@ -24,7 +24,7 @@ const height = Dimensions.get("window").height;
 console.log(height);
 
 export default function App() {
-      const [userToken, setUsertoken] = useState();
+      const [userToken, setUsertoken] = useState("I74dQUlJRixV2pRM");
       const [isLoading, setIsloading] = useState(false);
       console.log("userToken is " + userToken);
 
@@ -141,6 +141,11 @@ export default function App() {
                                                                   <Stack.Screen name="Room">
                                                                         {() => (
                                                                               <RoomScreen />
+                                                                        )}
+                                                                  </Stack.Screen>
+                                                                  <Stack.Screen name="Map">
+                                                                        {() => (
+                                                                              <MapScreen />
                                                                         )}
                                                                   </Stack.Screen>
                                                             </Stack.Navigator>
