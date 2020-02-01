@@ -4,7 +4,9 @@
 
 <!-- // ![Airbnbdemo](https://user-images.githubusercontent.com/55689599/73590022-bd24fb00-44dd-11ea-9a40-244c7f03726f.gif) -->
 
+<p align="center">
 <img src="https://user-images.githubusercontent.com/55689599/73590022-bd24fb00-44dd-11ea-9a40-244c7f03726f.gif">
+</p>
 
 ## Install the project
 
