@@ -145,6 +145,7 @@ export default function SignupScreen({ setToken }) {
                                     </Text>
                                     <TextInput
                                           autoCapitalize="none"
+                                          multiline="true"
                                           style={styles.textInput}
                                           placeholder="description"
                                           value={description}

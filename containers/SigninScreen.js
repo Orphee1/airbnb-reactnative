@@ -66,9 +66,12 @@ export default function SigninScreen({ setToken }) {
                                                 fontSize: 20
                                           }}
                                     >
-                                          Name:
+                                          Email:
                                     </Text>
                                     <TextInput
+                                          // autoFocus="true"
+                                          // clearTextOnFocus="true"
+
                                           autoCapitalize="none"
                                           style={styles.textInput}
                                           placeholder="email"
