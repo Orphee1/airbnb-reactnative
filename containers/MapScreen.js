@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { ActivityIndicator, Text, View } from "react-native";
 import MapView from "react-native-maps";
 
@@ -8,11 +9,9 @@ import * as Location from "expo-location";
 
 export default function MapScreen() {
       const [location, setLocation] = useState(null);
-
+      const navigation = useNavigation();
       const route = useRoute();
-
       const rooms = route.params.rooms;
-
       // console.log(rooms);
 
       useEffect(() => {
@@ -38,7 +37,7 @@ export default function MapScreen() {
                         <MapView
                               showsUserLocation={true}
                               style={{ height: 800, marginTop: 50 }}
-                              provider="google"
+                              // provider="google"
                               initialRegion={{
                                     latitude: location.coords.latitude,
                                     longitude: location.coords.longitude,

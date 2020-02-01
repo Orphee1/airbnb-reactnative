@@ -36,4 +36,5 @@ npm start
 - React Native
 - React Navigation
 - Expo - version 36.0
+- Expo Location - version 8.0
 - Axios - version 0.19
