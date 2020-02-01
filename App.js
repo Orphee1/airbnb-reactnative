@@ -24,7 +24,7 @@ const height = Dimensions.get("window").height;
 console.log(height);
 
 export default function App() {
-      const [userToken, setUsertoken] = useState("I74dQUlJRixV2pRM");
+      const [userToken, setUsertoken] = useState();
       const [isLoading, setIsloading] = useState(false);
       console.log("userToken is " + userToken);
 
