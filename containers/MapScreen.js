@@ -17,8 +17,6 @@ export default function MapScreen() {
 
       useEffect(() => {
             const askPermission = async () => {
-                  console.log("Here we are");
-
                   const { status } = await Permissions.askAsync(
                         Permissions.LOCATION
                   );
