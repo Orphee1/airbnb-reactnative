@@ -2,9 +2,7 @@
 
 > A little clone of Airbnb' s app made with React Native.
 
-<p align="center">
-![Airbnbdemo](https://user-images.githubusercontent.com/55689599/73589741-c6f92f00-44da-11ea-84ba-e6825513eb7c.gif)
-</p>
+![Airbnbdemo](https://user-images.githubusercontent.com/55689599/73590022-bd24fb00-44dd-11ea-9a40-244c7f03726f.gif)
 
 ## Install the project
 
