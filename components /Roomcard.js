@@ -1,12 +1,16 @@
 import React from "react";
 import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
+import Swiper from "react-native-swiper";
 
+import Colors from "../assets/Colors";
 // Icon import
 import { Ionicons } from "@expo/vector-icons";
 
 export default function Roomcard({ item }) {
       const size = 50;
       const stars = [];
+      console.log(item.photos);
+      console.log(item.photos.length);
 
       for (let i = 0; i < 5; i++) {
             if (i < item.ratingValue) {
@@ -36,35 +40,79 @@ export default function Roomcard({ item }) {
                         paddingBottom: 10
                   }}
             >
-                  <ImageBackground
-                        style={{
-                              width: "100%",
-                              height: 200
-                        }}
-                        source={{
-                              uri: item.photos[0]
-                        }}
+                  <Swiper
+                        horizontal={true}
+                        showsPagination={false}
+                        autoplay={true}
+                        activeDotColor={Colors.pink}
+                        height={260}
                   >
-                        <View
+                        {item.photos.map((photo, index) => {
+                              return (
+                                    <ImageBackground
+                                          key={index}
+                                          style={{
+                                                width: "100%",
+                                                height: 250
+                                          }}
+                                          source={{
+                                                uri: photo
+                                          }}
+                                    >
+                                          <View
+                                                style={{
+                                                      backgroundColor:
+                                                            "rgba(0,0,0,0.9)",
+                                                      position: "absolute",
+                                                      bottom: 10,
+                                                      left: 0,
+                                                      padding: 15,
+                                                      alignItems: "center",
+                                                      justifyContent: "center"
+                                                }}
+                                          >
+                                                <Text
+                                                      style={{
+                                                            color: "white"
+                                                      }}
+                                                >
+                                                      {item.price} €
+                                                </Text>
+                                          </View>
+                                    </ImageBackground>
+                              );
+                        })}
+                  </Swiper>
+                  {/* <ImageBackground
+                              key={index}
                               style={{
-                                    backgroundColor: "rgba(0,0,0,0.9)",
-                                    position: "absolute",
-                                    bottom: 10,
-                                    left: 0,
-                                    padding: 15,
-                                    alignItems: "center",
-                                    justifyContent: "center"
+                                    width: "100%",
+                                    height: 200
+                              }}
+                              source={{
+                                    uri: item.photos[0]
                               }}
                         >
-                              <Text
+                              <View
                                     style={{
-                                          color: "white"
+                                          backgroundColor: "rgba(0,0,0,0.9)",
+                                          position: "absolute",
+                                          bottom: 10,
+                                          left: 0,
+                                          padding: 15,
+                                          alignItems: "center",
+                                          justifyContent: "center"
                                     }}
                               >
-                                    {item.price} €
-                              </Text>
-                        </View>
-                  </ImageBackground>
+                                    <Text
+                                          style={{
+                                                color: "white"
+                                          }}
+                                    >
+                                          {item.price} €
+                                    </Text>
+                              </View>
+                        </ImageBackground> */}
 
                   <View
                         style={{
