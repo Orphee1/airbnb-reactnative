@@ -83,36 +83,7 @@ export default function Roomcard({ item }) {
                               );
                         })}
                   </Swiper>
-                  {/* <ImageBackground
-                              key={index}
-                              style={{
-                                    width: "100%",
-                                    height: 200
-                              }}
-                              source={{
-                                    uri: item.photos[0]
-                              }}
-                        >
-                              <View
-                                    style={{
-                                          backgroundColor: "rgba(0,0,0,0.9)",
-                                          position: "absolute",
-                                          bottom: 10,
-                                          left: 0,
-                                          padding: 15,
-                                          alignItems: "center",
-                                          justifyContent: "center"
-                                    }}
-                              >
-                                    <Text
-                                          style={{
-                                                color: "white"
-                                          }}
-                                    >
-                                          {item.price} €
-                                    </Text>
-                              </View>
-                        </ImageBackground> */}
+                
 
                   <View
                         style={{
