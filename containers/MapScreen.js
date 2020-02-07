@@ -26,6 +26,24 @@ export default function MapScreen() {
                         );
                         alert(JSON.stringify(location));
                         setLocation(location);
+                  } else {
+                        let latSum = 0;
+                        let lonSum = 0;
+                        for (let i = 0; i < rooms.length; i++) {
+                              latSum = latSum + rooms[i].loc[1];
+                              lonSum = lonSum + rooms[i].loc[0];
+                        }
+                        let latAverage = latSum / rooms.length;
+                        let lonAverage = lonSum / rooms.length;
+                        console.log(latAverage);
+                        console.log(lonAverage);
+
+                        setLocation({
+                              coords: {
+                                    latitude: latAverage,
+                                    longitude: lonAverage
+                              }
+                        });
                   }
             };
             askPermission();
@@ -41,8 +59,8 @@ export default function MapScreen() {
                               initialRegion={{
                                     latitude: location.coords.latitude,
                                     longitude: location.coords.longitude,
-                                    latitudeDelta: 0.4,
-                                    longitudeDelta: 0.4
+                                    latitudeDelta: 0.2,
+                                    longitudeDelta: 0.2
                               }}
                         >
                               {rooms.map((room, index) => {
