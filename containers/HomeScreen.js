@@ -31,7 +31,8 @@ export default function HomeScreen() {
             const fetchData = async () => {
                   try {
                         const response = await Axios.get(
-                              "https://airbnb-api.herokuapp.com/api/room?city=paris"
+                              // "https://airbnb-api.herokuapp.com/api/room?city=paris"
+                              "http://localhost:3100/api/room?city=paris"
                         );
                         if (response.data.rooms) {
                               setRooms(response.data.rooms);

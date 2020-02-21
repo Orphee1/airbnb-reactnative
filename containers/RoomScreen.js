@@ -34,7 +34,8 @@ export default function RoomScreen() {
                   try {
                         console.log("new render");
                         const response = await Axios.get(
-                              "https://airbnb-api.herokuapp.com/api/room/" + id
+                              // "https://airbnb-api.herokuapp.com/api/room/" + id
+                              "http://localhost:3100/api/room/" + id
                         );
 
                         if (response) {

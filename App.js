@@ -24,8 +24,10 @@ const height = Dimensions.get("window").height;
 console.log(height);
 
 export default function App() {
-      const [userToken, setUsertoken] = useState();
+      const [userToken, setUsertoken] = useState("ZEuTI5ZIyPRc2D7y");
+      // const [userToken, setUsertoken] = useState();
       const [isLoading, setIsloading] = useState(false);
+      const [name, setName] = useState();
       console.log("userToken is " + userToken);
 
       const setToken = async token => {
@@ -65,6 +67,7 @@ export default function App() {
                                           {() => (
                                                 <SigninScreen
                                                       setToken={setToken}
+                                                      setName={setName}
                                                 />
                                           )}
                                     </Stack.Screen>
@@ -185,6 +188,9 @@ export default function App() {
                                                                               <ProfileScreen
                                                                                     setToken={
                                                                                           setToken
+                                                                                    }
+                                                                                    name={
+                                                                                          name
                                                                                     }
                                                                               />
                                                                         )}

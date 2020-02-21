@@ -87,13 +87,17 @@ export default function MapScreen() {
                                                             width: 40,
                                                             height: 20,
                                                             backgroundColor:
-                                                                  "white",
+                                                                  "black",
                                                             justifyContent:
                                                                   "center",
                                                             alignItems: "center"
                                                       }}
                                                 >
-                                                      <Text>
+                                                      <Text
+                                                            style={{
+                                                                  color: "white"
+                                                            }}
+                                                      >
                                                             {room.price} €
                                                       </Text>
                                                 </View>
