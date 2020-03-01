@@ -188,11 +188,12 @@ export default function SignupScreen({ setToken }) {
                               title="sign-up"
                               mode="contained"
                               onPress={async () => {
-                                    console.log("On Press OK");
                                     try {
-                                          console.log("Here we are");
                                           const response = await Axios.post(
-                                                "https://airbnb-api.herokuapp.com/api/user/sign_up",
+                                                // "https://airbnb-api.herokuapp.com/api/user/sign_up",
+
+                                                "http://localhost:3100/api/user/sign_up",
+
                                                 {
                                                       email: email,
                                                       password: password,

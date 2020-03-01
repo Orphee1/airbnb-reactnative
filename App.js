@@ -27,7 +27,7 @@ export default function App() {
       const [userToken, setUsertoken] = useState("ZEuTI5ZIyPRc2D7y");
       // const [userToken, setUsertoken] = useState();
       const [isLoading, setIsloading] = useState(false);
-      const [name, setName] = useState();
+      const [name, setName] = useState("");
       console.log("userToken is " + userToken);
 
       const setToken = async token => {

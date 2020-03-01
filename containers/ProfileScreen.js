@@ -18,6 +18,8 @@ import Axios from "axios";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 
+import Profile from "../assets/profile.png";
+
 // Icon import
 
 import { MaterialIcons } from "@expo/vector-icons";
@@ -27,8 +29,12 @@ const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
 console.log(height);
 
+const DEFAULT_STATE =
+      "https://www.dreamspeed.fr/wp-content/uploads/2019/12/Network-Profile.png";
 export default function ProfileScreen({ name, setToken }) {
-      const [image, setImage] = useState();
+      const [image, setImage] = useState(DEFAULT_STATE);
+      const [cliped, setCliped] = useState(true);
+      const [selected, setSelected] = useState(false);
       const [uploading, setUploading] = useState(false);
       // const fetchData = async () => {
       //       try {
@@ -63,19 +69,18 @@ export default function ProfileScreen({ name, setToken }) {
                         uploadResponse = await uploadImageAsync(
                               pickerResult.uri
                         );
-                        // console.log("Here we are");
-                        // console.log(uploadResponse);
 
                         uploadResult = await uploadResponse.json();
-                        // console.log("Here we are");
+
                         // console.log(uploadResult);
+
                         setImage(uploadResult);
+                        setCliped(false);
                         // if (
                         //       Array.isArray(uploadResult) === true &&
                         //       uploadResult.length > 0
                         // ) {
-                        //       // console.log("Here we are");
-                        //       // console.log(uploadResult[0]);
+                        //
                         //       console.log("Here we are");
                         //       console.log(uploadResult[0]);
                         //       setImage(uploadResult[0]);
@@ -141,18 +146,6 @@ export default function ProfileScreen({ name, setToken }) {
             >
                   <View
                         style={{
-                              flex: 1,
-                              justifyContent: "center",
-                              alignItems: "center"
-                        }}
-                  >
-                        <MaterialIcons name="people" size={90} color="white" />
-
-                        <Text style={styles.title}>Profile</Text>
-                  </View>
-
-                  <View
-                        style={{
                               flexDirection: "row",
                               width: width / 2,
                               // height: height / 6,
@@ -160,21 +153,17 @@ export default function ProfileScreen({ name, setToken }) {
                               justifyContent: "space-around"
                         }}
                   >
-                        <Text style={{ color: "white", fontSize: 30 }}>
-                              Bonjour
-                        </Text>
-                        <Text style={{ color: "white", fontSize: 30 }}>
+                        <Text
+                              style={{
+                                    color: "white",
+                                    fontSize: 30
+                                    // marginLeft: 10
+                              }}
+                        >
                               {name}
                         </Text>
                   </View>
-                  <Text style={styles.exampleText}>
-                        Example: Upload ImagePicker result
-                  </Text>
-                  <Button
-                        onPress={pickImage}
-                        title="Pick an image from camera roll"
-                  />
-                  <Button onPress={takePhoto} title="Take a photo" />
+
                   {image && (
                         <View style={styles.maybeRenderContainer}>
                               <View style={styles.maybeRenderImageContainer}>
@@ -183,13 +172,21 @@ export default function ProfileScreen({ name, setToken }) {
                                           style={styles.maybeRenderImage}
                                     />
                               </View>
-                              <Text
-                                    onPress={copyToClipboard}
-                                    onLongPress={share}
-                                    style={styles.maybeRenderImageText}
-                              >
-                                    {image}
-                              </Text>
+                              {cliped === false && (
+                                    <Text
+                                          onPress={() => {
+                                                copyToClipboard();
+                                                setCliped(true);
+                                          }}
+                                          onLongPress={() => {
+                                                share();
+                                                setCliped(true);
+                                          }}
+                                          style={styles.maybeRenderImageText}
+                                    >
+                                          {image}
+                                    </Text>
+                              )}
                         </View>
                   )}
                   {uploading && (
@@ -202,6 +199,59 @@ export default function ProfileScreen({ name, setToken }) {
                               <ActivityIndicator color="#fff" size="large" />
                         </View>
                   )}
+                  <View
+                        style={{
+                              height: height / 3,
+                              width: width / 1.4,
+                              display: "flex",
+                              alignItems: "center"
+                        }}
+                  >
+                        {selected === false ? (
+                              <TouchableOpacity
+                                    onPress={() => {
+                                          setSelected(true);
+                                    }}
+                              >
+                                    <Text
+                                          style={{ color: "white", margin: 10 }}
+                                    >
+                                          Mettre à jour votre photo de profil
+                                    </Text>
+                              </TouchableOpacity>
+                        ) : (
+                              <View
+                                    style={{
+                                          flexDirection: "row",
+                                          alignItems: "center"
+                                    }}
+                              >
+                                    <TouchableOpacity
+                                          onPress={() => {
+                                                pickImage();
+                                          }}
+                                    >
+                                          <Text
+                                                style={{
+                                                      color: "white",
+                                                      margin: 10
+                                                }}
+                                          >
+                                                Choisir une photo
+                                          </Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                          onPress={() => {
+                                                takePhoto();
+                                          }}
+                                    >
+                                          <Text style={{ color: "white" }}>
+                                                Prenez une photo
+                                          </Text>
+                                    </TouchableOpacity>
+                              </View>
+                        )}
+                  </View>
 
                   <TouchableOpacity
                         onPress={() => {
@@ -280,7 +330,8 @@ const styles = StyleSheet.create({
                   width: 4
             },
             shadowRadius: 5,
-            width: 250
+            width: 250,
+            height: 265
       },
       maybeRenderImageContainer: {
             borderTopLeftRadius: 3,
