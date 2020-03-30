@@ -31,6 +31,7 @@ console.log(height);
 
 const DEFAULT_STATE =
       "https://www.dreamspeed.fr/wp-content/uploads/2019/12/Network-Profile.png";
+
 export default function ProfileScreen({ name, setToken }) {
       const [image, setImage] = useState(DEFAULT_STATE);
       const [cliped, setCliped] = useState(true);
@@ -160,7 +161,7 @@ export default function ProfileScreen({ name, setToken }) {
                                     // marginLeft: 10
                               }}
                         >
-                              {name}
+                              Bonjour {name}
                         </Text>
                   </View>
 
@@ -173,8 +174,10 @@ export default function ProfileScreen({ name, setToken }) {
                                     />
                               </View>
                               {cliped === false && (
-                                    <Text
-                                          onPress={() => {
+                                    <TouchableOpacity
+                                          onPress={event => {
+                                                // event.preventDefault();
+                                                alert("on press OK");
                                                 copyToClipboard();
                                                 setCliped(true);
                                           }}
@@ -182,10 +185,17 @@ export default function ProfileScreen({ name, setToken }) {
                                                 share();
                                                 setCliped(true);
                                           }}
-                                          style={styles.maybeRenderImageText}
                                     >
-                                          {image}
-                                    </Text>
+                                          <Text
+                                                style={
+                                                      styles.maybeRenderImageText
+                                                }
+                                          >
+                                                {/* {image} */}
+                                                Partager cette image ou la
+                                                copier dans le presse-papiers
+                                          </Text>
+                                    </TouchableOpacity>
                               )}
                         </View>
                   )}
@@ -223,7 +233,8 @@ export default function ProfileScreen({ name, setToken }) {
                               <View
                                     style={{
                                           flexDirection: "row",
-                                          alignItems: "center"
+                                          alignItems: "center",
+                                          marginTop: 60
                                     }}
                               >
                                     <TouchableOpacity
@@ -246,7 +257,7 @@ export default function ProfileScreen({ name, setToken }) {
                                           }}
                                     >
                                           <Text style={{ color: "white" }}>
-                                                Prenez une photo
+                                                Prendre une photo
                                           </Text>
                                     </TouchableOpacity>
                               </View>
@@ -268,14 +279,6 @@ async function uploadImageAsync(uri) {
       // const apiUrl = "https://airbnb-api.herokuapp.com/api/user/upload_picture";
       const apiUrl = "http://localhost:3100/api/user/upload_picture";
 
-      // Note:
-      // Uncomment this if you want to experiment with local server
-      //
-      // if (Constants.isDevice) {
-      //   apiUrl = `https://your-ngrok-subdomain.ngrok.io/upload`;
-      // } else {
-      //   apiUrl = `http://localhost:3000/upload`
-      // }
       const uriParts = uri.split(".");
       console.log("here we are");
 
@@ -344,7 +347,9 @@ const styles = StyleSheet.create({
       },
       maybeRenderImageText: {
             paddingHorizontal: 10,
-            paddingVertical: 10
+            paddingVertical: 10,
+            color: "white"
+            // height: 100
       },
       title: {
             color: "white",
