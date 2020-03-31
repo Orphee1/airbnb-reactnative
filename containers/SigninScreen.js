@@ -16,7 +16,7 @@ import Axios from "axios";
 // Icon import
 import { Entypo } from "@expo/vector-icons";
 
-export default function SigninScreen({ setName, setToken }) {
+export default function SigninScreen({ setId, setName, setToken }) {
       const navigation = useNavigation();
       const [email, setEmail] = useState("");
       const [password, setPassword] = useState("");
@@ -123,6 +123,7 @@ export default function SigninScreen({ setName, setToken }) {
                               title="log-in"
                               mode="contained"
                               onPress={async () => {
+                                    // alert("On press OK");
                                     try {
                                           const response = await Axios.post(
                                                 // "https://airbnb-api.herokuapp.com/api/user/log_in",
@@ -133,12 +134,13 @@ export default function SigninScreen({ setName, setToken }) {
                                                 }
                                           );
                                           console.log(response.data);
-                                          if (response.data.token) {
+                                          if (response.data) {
                                                 setToken(response.data.token);
                                                 setName(
                                                       response.data.account
                                                             .username
                                                 );
+                                                setId(response.data._id);
                                           }
                                     } catch (error) {
                                           alert(error.message);

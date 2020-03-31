@@ -83,7 +83,6 @@ export default function Roomcard({ item }) {
                               );
                         })}
                   </Swiper>
-            
 
                   <View
                         style={{

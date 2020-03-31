@@ -21,14 +21,16 @@ const Tab = createBottomTabNavigator();
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
-console.log(height);
 
 export default function App() {
       const [userToken, setUsertoken] = useState("ZEuTI5ZIyPRc2D7y");
       // const [userToken, setUsertoken] = useState();
       const [isLoading, setIsloading] = useState(false);
       const [name, setName] = useState("");
+      // const [id, setId] = useState();
+      const [id, setId] = useState("5e4f89c153952b05cbf3198b");
       console.log("userToken is " + userToken);
+      // console.log(id);
 
       const setToken = async token => {
             if (token) {
@@ -68,6 +70,7 @@ export default function App() {
                                                 <SigninScreen
                                                       setToken={setToken}
                                                       setName={setName}
+                                                      setId={setId}
                                                 />
                                           )}
                                     </Stack.Screen>
@@ -191,6 +194,12 @@ export default function App() {
                                                                                     }
                                                                                     name={
                                                                                           name
+                                                                                    }
+                                                                                    id={
+                                                                                          id
+                                                                                    }
+                                                                                    token={
+                                                                                          userToken
                                                                                     }
                                                                               />
                                                                         )}

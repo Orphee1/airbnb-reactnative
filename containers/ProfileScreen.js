@@ -29,23 +29,16 @@ const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
 console.log(height);
 
+// anonymous image
 const DEFAULT_STATE =
       "https://www.dreamspeed.fr/wp-content/uploads/2019/12/Network-Profile.png";
 
-export default function ProfileScreen({ name, setToken }) {
+export default function ProfileScreen({ id, name, setToken, token }) {
       const [image, setImage] = useState(DEFAULT_STATE);
       const [cliped, setCliped] = useState(true);
       const [selected, setSelected] = useState(false);
       const [uploading, setUploading] = useState(false);
-      // const fetchData = async () => {
-      //       try {
-      //             const response = await Axios.get(
-      //                   "https://airbnb-api.herokuapp.com/api/user/:id"
-      //             );
-      //       } catch (error) {
-      //             console.log(error.message);
-      //       }
-      // };
+      console.log(id);
 
       const share = useCallback(() => {
             Share.share({
@@ -68,7 +61,9 @@ export default function ProfileScreen({ name, setToken }) {
 
                   if (!pickerResult.cancelled) {
                         uploadResponse = await uploadImageAsync(
-                              pickerResult.uri
+                              pickerResult.uri,
+                              id,
+                              token
                         );
 
                         uploadResult = await uploadResponse.json();
@@ -275,9 +270,15 @@ export default function ProfileScreen({ name, setToken }) {
       );
 }
 
-async function uploadImageAsync(uri) {
+async function uploadImageAsync(uri, id, token) {
+      console.log(id);
       // const apiUrl = "https://airbnb-api.herokuapp.com/api/user/upload_picture";
-      const apiUrl = "http://localhost:3100/api/user/upload_picture";
+      const apiUrl =
+            "http://localhost:3100/api/user/upload_picture?id=" +
+            id +
+            "&token=" +
+            token;
+      console.log(apiUrl);
 
       const uriParts = uri.split(".");
       console.log("here we are");

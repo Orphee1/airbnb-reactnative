@@ -13,7 +13,9 @@ import Axios from "axios";
 // Components import
 import Roomcard from "../components /Roomcard";
 
+import defaultRoom from "../assets/defaultRoom";
 export default function RoomScreen() {
+      // const [room, setRoom] = useState(defaultRoom);
       const [room, setRoom] = useState();
       const [isLoading, setIsLoading] = useState(true);
       const [isDescriptionDisplayed, setIsDescriptionDisplayed] = useState(
@@ -40,6 +42,8 @@ export default function RoomScreen() {
 
                         if (response) {
                               setRoom(response.data);
+                              console.log(response.data);
+
                               setIsLoading(false);
                         } else {
                               alert("An error occured");
