@@ -23,12 +23,12 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 export default function App() {
-      const [userToken, setUsertoken] = useState("ZEuTI5ZIyPRc2D7y");
-      // const [userToken, setUsertoken] = useState();
+      // const [userToken, setUsertoken] = useState("ZEuTI5ZIyPRc2D7y");
+      const [userToken, setUsertoken] = useState();
       const [isLoading, setIsloading] = useState(false);
       const [name, setName] = useState("");
-      // const [id, setId] = useState();
-      const [id, setId] = useState("5e4f89c153952b05cbf3198b");
+      const [id, setId] = useState();
+      // const [id, setId] = useState("5e4f89c153952b05cbf3198b");
       console.log("userToken is " + userToken);
       // console.log(id);
 

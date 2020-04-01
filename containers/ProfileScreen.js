@@ -38,7 +38,6 @@ export default function ProfileScreen({ id, name, setToken, token }) {
       const [cliped, setCliped] = useState(true);
       const [selected, setSelected] = useState(false);
       const [uploading, setUploading] = useState(false);
-      console.log(id);
 
       const share = useCallback(() => {
             Share.share({
@@ -62,7 +61,6 @@ export default function ProfileScreen({ id, name, setToken, token }) {
                   if (!pickerResult.cancelled) {
                         uploadResponse = await uploadImageAsync(
                               pickerResult.uri,
-                              id,
                               token
                         );
 
@@ -270,14 +268,10 @@ export default function ProfileScreen({ id, name, setToken, token }) {
       );
 }
 
-async function uploadImageAsync(uri, id, token) {
-      console.log(id);
+async function uploadImageAsync(uri, token) {
       // const apiUrl = "https://airbnb-api.herokuapp.com/api/user/upload_picture";
       const apiUrl =
-            "http://localhost:3100/api/user/upload_picture?id=" +
-            id +
-            "&token=" +
-            token;
+            "http://localhost:3100/api/user/upload_picture?token=" + token;
       console.log(apiUrl);
 
       const uriParts = uri.split(".");
@@ -296,7 +290,8 @@ async function uploadImageAsync(uri, id, token) {
             body: formData,
             headers: {
                   // Authorization: "Bearer KbGrJosUZSNMwJaa",
-                  Authorization: "Bearer NK0CAtu1NLGtuY3b",
+                  // authorization: "Bearer NK0CAtu1NLGtuY3b",
+                  authorization: "Bearer " + token,
                   Accept: "application/json",
                   "Content-Type": "multipart/form-data"
             }
